@@ -26,6 +26,6 @@ void main()
 {
     vec4 DisplayPos = T(Proj)*T(RTA)*T(TTO)*T(TTRB)*RTA*T(RS)*T(TTR)*vec4(GridPoint.xy, -GridPoint.z, 1.0);
     gl_Position = DisplayPos;
-    gl_PointSize = 1.5;  
+    //gl_PointSize = 1.5;  //Causes failure on certain devices (mainly mobile)
     intensity = GridPoint.w;
 }

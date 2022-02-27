@@ -1,5 +1,6 @@
+var to_add = 0.02;
 //Using this camera is always facing in -Z with right the x-axis, but scene moves around camera
-var Ref_URL = "https://hitthesurf.github.io/WebGL_LIDAR"; //Different to gh-pages allows to test using local server
+var Ref_URL = ""; //Different to gh-pages allows to test using local server
 var start_func = ""; 
 
 function getMaxOfArray(numArray) {
@@ -279,19 +280,32 @@ for (var line, _pj_c = 0, _pj_a = lines.slice(10, lines.length), _pj_b = _pj_a.l
 }
 
 var Max_Vals = [];
+var Size_Of_Point = 5;
 var ITER = parseInt((_pj_a.length-3)/5);
 
 for (var i = 0; i < ITER; i += 1)
    {
     Max_Vals.push(my_info[5 * i + 3]);
    }
-//console.log(Max_Vals)
+console.log(Max_Vals)
 max_intensity = getMaxOfArray(Max_Vals)
 
 console.log("Max_Intensity")
 console.log(max_intensity)
 var GridPoints = my_info;
-//console.log(GridPoints);
+//Duplicate data to use gl.LINES which work on more devices
+
+var GridPoints_diff = GridPoints.map(v=>v+to_add) //Note effects intensity
+console.log(GridPoints);
+
+//Join Together
+var GridPoints_Join = []
+var Rows = GridPoints.length/Size_Of_Point;
+for (var Row = 0; Row<Rows; Row++)
+{
+	for (var col = 0; col<Size_Of_Point; col++) {GridPoints_Join.push(GridPoints[Row*Size_Of_Point+col]);}
+	for (var col = 0; col<Size_Of_Point; col++) {GridPoints_Join.push(GridPoints_diff[Row*Size_Of_Point+col])};
+}
 	//var Indices = 
 //[ 1,2,3,4,5,6,7,8,9,10   ];
 
@@ -299,7 +313,7 @@ var GridPoints = my_info;
   //Send data to GPU buffer
     var VBO = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, VBO);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(GridPoints), gl.STATIC_DRAW);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(GridPoints_Join), gl.STATIC_DRAW);
     
 
     
@@ -395,7 +409,9 @@ var GridPoints = my_info;
         //Draw
         //gl.drawElements(gl.LINE_STRIP, Indices.length, gl.UNSIGNED_SHORT, 0);
         //gl.drawElements(gl.TRIANGLES, Indices.length, gl.UNSIGNED_SHORT, 0);
-        gl.drawArrays(gl.POINTS, 0, lines.length-10);
+		//glEnable( GL_PROGRAM_POINT_SIZE );
+	  //gl.glLineWidth(8);
+        gl.drawArrays(gl.LINES, 0, 2*(lines.length-10)); //Can be points if card supports glPointSize
         requestAnimationFrame(loop);
     };
     requestAnimationFrame(loop);
