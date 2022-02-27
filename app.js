@@ -1,5 +1,5 @@
 //Using this camera is always facing in -Z with right the x-axis, but scene moves around camera
-var Ref_URL = ""; //Different to gh-pages allows to test using local server
+var Ref_URL = "https://hitthesurf.github.io/WebGL_LIDAR"; //Different to gh-pages allows to test using local server
 var start_func = ""; 
 
 function getMaxOfArray(numArray) {
