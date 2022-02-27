@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <title> WebGL - 3D Graph </title>
+    </head>
+    <body onload="Init()">
+        <canvas id="Render_Surface" width="800" height="800">
+         Your browser doess not support HTML5
+        </canvas>
+        <br>
+        <button id="btnProj">Click me</button>
+        <button id="btnResetCam">Reset Camera</button>
+        <button id="btnCompile"></button>
+        <br>
+        <textarea id="FunctionText" cols="0" rows="0"></textarea>
+        <b>How to Use:</b>
+        Perspective View: Gives realistic view above car
+        
+        Orthographic View: Give birds eye view of road
+        
+        For different pcd files use "?dataFile=325" at the end of the URL,
+        default pcd file is "235"
+        
+        Language is GLSL.
+        
+        <a href="https://github.com/Hitthesurf/Rendering/blob/main/3DGraph/2DxyWaveExample.txt">https://github.com/Hitthesurf/Rendering/blob/main/3DGraph/2DxyWaveExample.txt</a>
+        <script src="movement.js"></script>
+        <script src="loadfile.js"></script>
+        <script src="app.js"></script>
+        
+    </body>
+</html>
+         
