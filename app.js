@@ -285,13 +285,13 @@ for (var i = 0; i < ITER; i += 1)
    {
     Max_Vals.push(my_info[5 * i + 3]);
    }
-console.log(Max_Vals)
+//console.log(Max_Vals)
 max_intensity = getMaxOfArray(Max_Vals)
 
 console.log("Max_Intensity")
 console.log(max_intensity)
 var GridPoints = my_info;
-console.log(GridPoints);
+//console.log(GridPoints);
 	//var Indices = 
 //[ 1,2,3,4,5,6,7,8,9,10   ];
 
