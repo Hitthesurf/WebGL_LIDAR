@@ -268,7 +268,7 @@ lines = dataText.split("\n");
 console.log(lines.length)
 my_info = [];
 
-for (var line, _pj_c = 0, _pj_a = lines.slice(10, 300), _pj_b = _pj_a.length; _pj_c < _pj_b; _pj_c += 1) {
+for (var line, _pj_c = 0, _pj_a = lines.slice(10, lines.length), _pj_b = _pj_a.length; _pj_c < _pj_b; _pj_c += 1) {
   line = _pj_a[_pj_c];
   chunks = line.split(" ");
 
@@ -395,7 +395,7 @@ console.log(GridPoints);
         //Draw
         //gl.drawElements(gl.LINE_STRIP, Indices.length, gl.UNSIGNED_SHORT, 0);
         //gl.drawElements(gl.TRIANGLES, Indices.length, gl.UNSIGNED_SHORT, 0);
-        gl.drawArrays(gl.POINTS, 0, 300-10);
+        gl.drawArrays(gl.POINTS, 0, lines.length-10);
         requestAnimationFrame(loop);
     };
     requestAnimationFrame(loop);
