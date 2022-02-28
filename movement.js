@@ -7,6 +7,7 @@ var theta; //Radians
 var phi; //Radians
 var total_x_drag = 0;
 var total_y_drag = 0;
+var movement_calls = 0;
 
 var Orthographic = false;
 
@@ -60,29 +61,66 @@ var buttonClickProj = function(e)
     btnProj.innerText = GetbtnProjText(Orthographic);
 }
 
+//Movement with mouse and touchpad
+//But touchpad movement impacted by scrolling
 var onPointerDown = function(e)
 {
+    movement_calls = 0;
     isDragging = true;
     dragStart.x = e.offsetX ;
     dragStart.y = e.offsetY ;
+
+   
+
+    if (e.type == 'touchstart')
+    {
+        var touch = e.touches[0];
+        dragStart.x = touch.pageX
+        dragStart.y = touch.pageY
+
+    }
+
     console.log("Click down at " + dragStart.x + ", " + dragStart.y);
     
 }
 
 var onPointerUp = function(e)
 {
+    
     isDragging = false;
-    console.log("Release Click at " + e.offsetX + ", " + e.offsetY);
-    total_x_drag += e.offsetX - dragStart.x;
-    total_y_drag += e.offsetY - dragStart.y;
+
+    var offsetX = e.offsetX; 
+    var offsetY = e.offsetY;
+
+    if (e.type == 'touchend')
+    {
+         var touch = e.changedTouches[0];
+         offsetX = touch.pageX;
+         offsetY = touch.pageY;
+    }
+
+    console.log("Release Click at " + offsetX + ", " + offsetY + ", Movement Calls: " +  movement_calls);
+    total_x_drag += offsetX - dragStart.x;
+    total_y_drag += offsetY - dragStart.y;
+    movement_calls = 0;
 }
 
 var onPointerMove = function(e)
 {
+    movement_calls += 1;
+    var offsetX = e.offsetX; 
+    var offsetY = e.offsetY;
+    if (e.type == 'touchmove')
+    {
+         var touch = e.changedTouches[0];
+         offsetX = touch.pageX;
+         offsetY = touch.pageY;
+    }
+
     if (isDragging)
     {
-        theta = -(e.offsetX  - dragStart.x + total_x_drag)/100 + theta_start;
-        phi = clamp((e.offsetY - dragStart.y + total_y_drag)/100 + phi_start,
+        theta = -(offsetX  - dragStart.x + total_x_drag)/100 + theta_start;
+        phi = clamp((offsetY - dragStart.y + total_y_drag)/100 + phi_start,
         -Math.PI/2 + 0.001, Math.PI/2 - 0.001);
     }
 }
