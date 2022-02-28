@@ -1,6 +1,6 @@
 var to_add = 0.02;
 //Using this camera is always facing in -Z with right the x-axis, but scene moves around camera
-var Ref_URL = "https://hitthesurf.github.io/WebGL_LIDAR"; //Different to gh-pages allows to test using local server
+var Ref_URL = ""; //Different to gh-pages allows to test using local server
 var start_func = ""; 
 
 function getMaxOfArray(numArray) {
@@ -199,11 +199,16 @@ var Start = function(vertexShaderText, fragmentShaderText, dataText) {
     btnProj.innerText = GetbtnProjText(Orthographic);
     txtBoxFunctionText.value = start_func;
     
-    //Add event handelers for canvas
+    //Add event handelers for canvas (mouse controls)
     canvas.addEventListener('mousedown', onPointerDown);
     canvas.addEventListener('mouseup', onPointerUp);
     canvas.addEventListener('mousemove', onPointerMove);
     
+    //Add event handelers for canvas (touch controls)
+    canvas.addEventListener('touchstart', onPointerDown);
+    canvas.addEventListener('touchend', onPointerUp);
+    canvas.addEventListener('touchmove', onPointerMove);
+
     btnProj.addEventListener('click', buttonClickProj);
     btnResetCam.addEventListener('click', function() {ResetCamera(cam_dir);});
     btnCompile.addEventListener('click', function() 
