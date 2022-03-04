@@ -67,6 +67,8 @@ More functionality, scales with numbers to measure distance (parallel lines) .
 Multiple LIDAR sensors (on same car or different cars).
 
 ## Links
+DevPost: https://devpost.com/software/open-lidar
+
 GitHub Repo:  https://github.com/Hitthesurf/WebGL_LIDAR
 
 Webpage Demo: https://hitthesurf.github.io/WebGL_LIDAR/index.html?data_File=325
